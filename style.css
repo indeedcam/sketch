@@ -1,65 +1,95 @@
-@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
-
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'DotGothic16', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background-color: #f4f4f0;
-    color: #2b2b2b;
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+  background-color: #ffe5ec;
+  background-image: radial-gradient(#ffb3c1 1px, transparent 1px);
+  background-size: 16px 16px;
+  color: #5c3d46;
+  padding: 2rem;
 }
 
-header {
-    margin-bottom: 2rem;
-    text-align: left;
+/* Asymmetrical Layout Container */
+.site-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 850px;
+  margin: 2rem auto;
 }
 
-h1 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-    color: #2b2b2b;
+@media (min-width: 768px) {
+  .site-container {
+    grid-template-columns: 1fr 2fr;
+    gap: 2.5rem;
+  }
 }
 
-p.description {
-    font-size: 1rem;
-    color: #666666;
+/* CSS-only Frill / Lace Border Effect */
+.sidebar, .card {
+  background: #ffffff;
+  padding: 1.5rem;
+  border: 3px dashed #ff8fa3;
+  border-radius: 20px;
+  box-shadow: 6px 6px 0px #ffb3c1;
+  position: relative;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1rem;
+/* Frill scallop detail using pseudo-element */
+.sidebar::before, .card::before {
+  content: "";
+  position: absolute;
+  top: -8px; left: -8px; right: -8px; bottom: -8px;
+  border: 2px dotted #ff4d6d;
+  border-radius: 24px;
+  pointer-events: none;
 }
 
-.card {
-    aspect-ratio: 1 / 1;
-    border: 2px solid #cccccc;
-    border-radius: 0;
-    padding: 1rem;
-    text-decoration: none;
-    color: #2b2b2b;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.sidebar h1 {
+  font-size: 1.8rem;
+  color: #ff4d6d;
+  text-shadow: 1px 1px 0px #ffccd5;
 }
 
-.card:hover {
-    border-color: #888888;
-    background-color: #eaeaea;
+.tagline {
+  font-size: 0.9rem;
+  color: #ff758f;
+  margin-top: 0.25rem;
 }
 
-.card h2 {
-    font-size: 1.1rem;
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.card p {
-    font-size: 0.85rem;
-    color: #666666;
+.content h2 {
+  font-size: 1.1rem;
+  color: #ff4d6d;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px dashed #ffccd5;
+  padding-bottom: 0.25rem;
+}
+
+a {
+  color: #ff4d6d;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline dotted #ff4d6d;
+  background-color: #ffe5ec;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  margin-bottom: 0.4rem;
 }
