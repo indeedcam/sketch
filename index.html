@@ -10,10 +10,10 @@ body {
   word-spacing: 3px !important; 
   color: black !important;
   text-shadow: 1px 1px 1px grey;
-  
 }
-  .moving-diagonal-background {
 
+.moving-diagonal-background {
+  display: block; 
   position: fixed;
   top: 0;
   left: 0;
@@ -30,7 +30,8 @@ body {
   background-size: 56.57px 56.57px;
   animation: moveLines 2s linear infinite;
 }
-  @keyframes moveLines {
+
+@keyframes moveLines {
   from {
     background-position: 0 0;
   }
@@ -38,7 +39,7 @@ body {
     background-position: 56.57px 0;
   }
 }
-  
+
 
 
 .masonry-grid {
