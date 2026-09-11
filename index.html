@@ -5,21 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Windows 95 Desktop</title>
   <style>
+    @font-face {
+      font-family: 'Pixelated MS Sans Serif';
+      src: url('https://unpkg.com/98.css@0.1.4/dist/ms_sans_serif.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-smooth: never;
+      -webkit-font-smoothing: none;
+      -moz-osx-font-smoothing: unset;
     }
 
     body {
-      font-family: "MS Sans Serif", Tahoma, sans-serif;
-      background-color: #008080; /* Classic Win95 Teal */
+      font-family: 'Pixelated MS Sans Serif', Arial, sans-serif;
+      font-size: 11px;
+      background-color: #008080;
       min-height: 100vh;
       overflow: hidden;
       color: #000000;
     }
 
-    /* Windows 95 Outer Frame (Beveled 3D Border) */
     .card {
       position: absolute;
       width: 280px;
@@ -33,7 +43,6 @@
       user-select: none;
     }
 
-    /* Title Bar (Drag Handle) */
     .window-header {
       background: linear-gradient(90deg, #000080, #1084d0);
       color: #ffffff;
@@ -53,14 +62,9 @@
     .title-left {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
     }
 
-    .window-icon {
-      font-size: 10px;
-    }
-
-    /* Window Controls (Minimize, Maximize, Close) */
     .window-controls {
       display: flex;
       gap: 2px;
@@ -74,6 +78,7 @@
       border-left: 1px solid #ffffff;
       border-right: 1px solid #000000;
       border-bottom: 1px solid #000000;
+      font-family: 'Pixelated MS Sans Serif', sans-serif;
       font-size: 9px;
       font-weight: bold;
       line-height: 12px;
@@ -90,15 +95,13 @@
       padding: 1px 0 0 1px;
     }
 
-    /* Window Body Container */
     .card-body {
       padding: 12px;
       background: #c0c0c0;
-      font-size: 12px;
+      font-size: 11px;
       line-height: 1.4;
     }
 
-    /* Recessed Inset Area for Content */
     .inset-box {
       background: #ffffff;
       border-top: 2px solid #808080;
@@ -110,12 +113,14 @@
     }
 
     h1 {
-      font-size: 14px;
+      font-size: 11px;
+      font-weight: bold;
       margin-bottom: 4px;
     }
 
     h2 {
       font-size: 11px;
+      font-weight: bold;
       text-transform: uppercase;
       margin-bottom: 4px;
     }
@@ -133,11 +138,10 @@
 
   <div class="site-container">
 
-    <!-- Profile Window -->
     <header class="card draggable" style="top: 40px; left: 40px;">
       <div class="window-header">
         <div class="title-left">
-          <span class="window-icon">👤</span>
+          <span>👤</span>
           <span>Profile.exe</span>
         </div>
         <div class="window-controls">
@@ -152,11 +156,10 @@
       </div>
     </header>
     
-    <!-- About Window -->
     <section class="card draggable" style="top: 40px; left: 340px;">
       <div class="window-header">
         <div class="title-left">
-          <span class="window-icon">📝</span>
+          <span>📝</span>
           <span>About.txt</span>
         </div>
         <div class="window-controls">
@@ -172,11 +175,10 @@
       </div>
     </section>
 
-    <!-- Projects Window -->
     <section class="card draggable" style="top: 210px; left: 340px;">
       <div class="window-header">
         <div class="title-left">
-          <span class="window-icon">📁</span>
+          <span>📁</span>
           <span>Projects</span>
         </div>
         <div class="window-controls">
@@ -193,11 +195,10 @@
       </div>
     </section>
 
-    <!-- Contact Window -->
     <section class="card draggable" style="top: 200px; left: 40px;">
       <div class="window-header">
         <div class="title-left">
-          <span class="window-icon">🌐</span>
+          <span>🌐</span>
           <span>Contact.html</span>
         </div>
         <div class="window-controls">
@@ -224,15 +225,12 @@
         let offsetX = 0;
         let offsetY = 0;
 
-        // Bring window to top when clicked anywhere inside
         card.addEventListener('mousedown', () => {
           highestZIndex++;
           card.style.zIndex = highestZIndex;
         });
 
-        // Dragging ONLY happens when grabbing the blue header bar
         header.addEventListener('mousedown', (e) => {
-          // Ignore if clicking control buttons
           if (e.target.classList.contains('win-btn')) return;
 
           isDragging = true;
@@ -250,7 +248,6 @@
           isDragging = false;
         });
 
-        // Close window functionality
         if (closeBtn) {
           closeBtn.addEventListener('click', () => {
             card.style.display = 'none';
