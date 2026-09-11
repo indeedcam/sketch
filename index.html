@@ -1,260 +1,172 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Windows 95 Desktop</title>
+  <title>Personal Site</title>
   <style>
-    @font-face {
-      font-family: 'Pixelated MS Sans Serif';
-      src: url('https://unpkg.com/98.css@0.1.4/dist/ms_sans_serif.woff2') format('woff2');
-      font-weight: normal;
-      font-style: normal;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-smooth: never;
-      -webkit-font-smoothing: none;
-      -moz-osx-font-smoothing: unset;
     }
 
     body {
-      font-family: 'Pixelated MS Sans Serif', Arial, sans-serif;
-      font-size: 11px;
-      background-color: #008080;
-      min-height: 100vh;
-      overflow: hidden;
-      color: #000000;
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #f7f7f7;
+      padding: 40px 20px;
+      color: #111111;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Main Info Header Box */
+    .hero-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-card h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-card .tagline {
+      font-size: 1.1rem;
+      color: #666666;
+    }
+
+    .hero-card .bio {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #444444;
+      max-width: 600px;
+    }
+
+    /* Pinterest Masonry Grid */
+    .masonry-grid {
+      column-count: 3;
+      column-gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .masonry-grid {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .masonry-grid {
+        column-count: 1;
+      }
     }
 
     .card {
-      position: absolute;
-      width: 280px;
-      background: #c0c0c0;
-      border-top: 2px solid #ffffff;
-      border-left: 2px solid #ffffff;
-      border-right: 2px solid #000000;
-      border-bottom: 2px solid #000000;
-      box-shadow: inset -1px -1px 0px #808080, inset 1px 1px 0px #dfdfdf;
-      padding: 3px;
-      user-select: none;
-    }
-
-    .window-header {
-      background: linear-gradient(90deg, #000080, #1084d0);
-      color: #ffffff;
-      padding: 3px 4px;
-      font-weight: bold;
-      font-size: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: grab;
-    }
-
-    .window-header:active {
-      cursor: grabbing;
-    }
-
-    .title-left {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .window-controls {
-      display: flex;
-      gap: 2px;
-    }
-
-    .win-btn {
-      width: 16px;
-      height: 14px;
-      background: #c0c0c0;
-      border-top: 1px solid #ffffff;
-      border-left: 1px solid #ffffff;
-      border-right: 1px solid #000000;
-      border-bottom: 1px solid #000000;
-      font-family: 'Pixelated MS Sans Serif', sans-serif;
-      font-size: 9px;
-      font-weight: bold;
-      line-height: 12px;
-      text-align: center;
-      color: #000000;
-      cursor: pointer;
-    }
-
-    .win-btn:active {
-      border-top: 1px solid #000000;
-      border-left: 1px solid #000000;
-      border-right: 1px solid #ffffff;
-      border-bottom: 1px solid #ffffff;
-      padding: 1px 0 0 1px;
-    }
-
-    .card-body {
-      padding: 12px;
-      background: #c0c0c0;
-      font-size: 11px;
-      line-height: 1.4;
-    }
-
-    .inset-box {
+      break-inside: avoid;
+      margin-bottom: 20px;
       background: #ffffff;
-      border-top: 2px solid #808080;
-      border-left: 2px solid #808080;
-      border-right: 2px solid #ffffff;
-      border-bottom: 2px solid #ffffff;
-      padding: 8px;
-      margin-top: 4px;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    h1 {
-      font-size: 11px;
-      font-weight: bold;
-      margin-bottom: 4px;
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     }
 
     h2 {
-      font-size: 11px;
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-bottom: 4px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    p, li {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #555555;
     }
 
     a {
-      color: #000080;
+      color: #111111;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 500;
+    }
+
+    a:hover {
+      color: #e60023;
     }
 
     ul {
-      list-style-position: inside;
+      list-style-type: none;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    li:last-child {
+      margin-bottom: 0;
     }
   </style>
 </head>
 <body>
 
-  <div class="site-container">
+  <div class="container">
 
-    <header class="card draggable" style="top: 40px; left: 40px;">
-      <div class="window-header">
-        <div class="title-left">
-          <span>👤</span>
-          <span>Profile.exe</span>
-        </div>
-        <div class="window-controls">
-          <button class="win-btn">_</button>
-          <button class="win-btn">□</button>
-          <button class="win-btn close-btn">✕</button>
-        </div>
-      </div>
-      <div class="card-body">
-        <h1>Jane Doe</h1>
-        <p>Designer & Developer</p>
-      </div>
+    <!-- Top Main Info Box -->
+    <header class="hero-card">
+      <h1>Jane Doe</h1>
+      <p class="tagline">Designer & Developer</p>
+      <p class="bio">Building clean, minimal digital spaces and thoughtful web applications. Welcome to my personal site!</p>
     </header>
-    
-    <section class="card draggable" style="top: 40px; left: 340px;">
-      <div class="window-header">
-        <div class="title-left">
-          <span>📝</span>
-          <span>About.txt</span>
-        </div>
-        <div class="window-controls">
-          <button class="win-btn">_</button>
-          <button class="win-btn">□</button>
-          <button class="win-btn close-btn">✕</button>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="inset-box">
-          <p>Building nostalgic digital spaces and fun web components.</p>
-        </div>
-      </div>
-    </section>
 
-    <section class="card draggable" style="top: 210px; left: 340px;">
-      <div class="window-header">
-        <div class="title-left">
-          <span>📁</span>
-          <span>Projects</span>
-        </div>
-        <div class="window-controls">
-          <button class="win-btn">_</button>
-          <button class="win-btn">□</button>
-          <button class="win-btn close-btn">✕</button>
-        </div>
-      </div>
-      <div class="card-body">
+    <!-- Pinterest Grid Below -->
+    <div class="masonry-grid">
+
+      <section class="card">
+        <h2>About</h2>
+        <p>Focused on frontend performance, minimal UI design, and simple layout architecture.</p>
+      </section>
+
+      <section class="card">
+        <h2>Projects</h2>
         <ul>
-          <li><a href="#">Project_Alpha.lnk</a></li>
-          <li><a href="#">Project_Beta.lnk</a></li>
+          <li><a href="#">Project Alpha</a> — Minimal Web App</li>
+          <li><a href="#">Project Beta</a> — Design System</li>
+          <li><a href="#">Project Gamma</a> — Open Source Tools</li>
         </ul>
-      </div>
-    </section>
+      </section>
 
-    <section class="card draggable" style="top: 200px; left: 40px;">
-      <div class="window-header">
-        <div class="title-left">
-          <span>🌐</span>
-          <span>Contact.html</span>
-        </div>
-        <div class="window-controls">
-          <button class="win-btn">_</button>
-          <button class="win-btn">□</button>
-          <button class="win-btn close-btn">✕</button>
-        </div>
-      </div>
-      <div class="card-body">
+      <section class="card">
+        <h2>Currently</h2>
+        <p>Reading, experimenting with grid systems, and building side projects in Dhaka.</p>
+      </section>
+
+      <section class="card">
+        <h2>Contact</h2>
         <p><a href="mailto:hello@example.com">hello@example.com</a></p>
-      </div>
-    </section>
+      </section>
+
+    </div>
 
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      let highestZIndex = 10;
-
-      document.querySelectorAll('.draggable').forEach(card => {
-        const header = card.querySelector('.window-header');
-        const closeBtn = card.querySelector('.close-btn');
-        let isDragging = false;
-        let offsetX = 0;
-        let offsetY = 0;
-
-        card.addEventListener('mousedown', () => {
-          highestZIndex++;
-          card.style.zIndex = highestZIndex;
-        });
-
-        header.addEventListener('mousedown', (e) => {
-          if (e.target.classList.contains('win-btn')) return;
-
-          isDragging = true;
-          offsetX = e.clientX - card.getBoundingClientRect().left;
-          offsetY = e.clientY - card.getBoundingClientRect().top;
-        });
-
-        document.addEventListener('mousemove', (e) => {
-          if (!isDragging) return;
-          card.style.left = `${e.clientX - offsetX}px`;
-          card.style.top = `${e.clientY - offsetY}px`;
-        });
-
-        document.addEventListener('mouseup', () => {
-          isDragging = false;
-        });
-
-        if (closeBtn) {
-          closeBtn.addEventListener('click', () => {
-            card.style.display = 'none';
-          });
-        }
-      });
-    });
-  </script>
 </body>
 </html>
