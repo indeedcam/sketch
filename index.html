@@ -62,7 +62,7 @@
     .top-section {
       display: flex;
       gap: 20px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       align-items: flex-start;
     }
 
@@ -72,7 +72,7 @@
       }
     }
 
-    /* Compact Fixed-Height Hero Header */
+    /* Compact Hero Header */
     .hero-card {
       flex: 1;
       padding: 12px 20px;
@@ -80,7 +80,7 @@
       flex-direction: column;
       justify-content: center;
       gap: 2px;
-      align-self: flex-start; /* Stops card from stretching to match side column height */
+      align-self: flex-start;
     }
 
     .hero-card h1 {
@@ -266,36 +266,27 @@
       background: #8c4a30;
     }
 
-    /* Pinterest Masonry Grid Below */
+    /* Fixed Seamless Flex Grid Below */
     .masonry-grid {
-      column-count: 3;
-      column-gap: 20px;
-    }
-
-    @media (max-width: 768px) {
-      .masonry-grid {
-        column-count: 2;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .masonry-grid {
-        column-count: 1;
-      }
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: flex-start;
     }
 
     .card {
-      break-inside: avoid;
-      margin-bottom: 20px;
+      /* Flexible basis to fill rows without leaving large gaps */
+      flex: 1 1 calc(33.333% - 20px);
+      min-width: 260px;
     }
 
     .card-content {
-      padding: 24px;
+      padding: 20px;
       position: relative;
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 400;
       margin-bottom: 0.5rem;
       color: #2b1d14;
@@ -425,7 +416,7 @@
 
     </div>
 
-    <!-- Masonry Grid Below -->
+    <!-- Tight Flex Grid Below -->
     <div class="masonry-grid">
 
       <section class="card stitched-card">
