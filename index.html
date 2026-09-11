@@ -23,7 +23,35 @@
       margin: 0 auto;
     }
 
-    /* Top Section: Main Info + Side Widgets */
+    /* Stitched Card Base Styling */
+    .stitched-card {
+      background: #ffffff;
+      border-radius: 4px;
+      border: 1px solid #e2e2e2;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Inner Stitched Line Effect */
+    .stitched-card::after {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border: 1.5px dashed #cccccc;
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    .stitched-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Top Section Layout */
     .top-section {
       display: flex;
       gap: 20px;
@@ -39,11 +67,7 @@
 
     .hero-card {
       flex: 1;
-      background: #ffffff;
-      border-radius: 20px;
       padding: 32px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-      border: 1px solid rgba(0, 0, 0, 0.05);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -72,7 +96,6 @@
       width: 280px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
     }
 
     @media (max-width: 768px) {
@@ -82,11 +105,11 @@
     }
 
     .widget-card {
-      background: #ffffff;
-      border-radius: 20px;
       padding: 20px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .widget-title {
@@ -118,7 +141,7 @@
 
     .cal-day {
       padding: 6px 0;
-      border-radius: 8px;
+      border-radius: 2px;
       color: #444;
     }
 
@@ -130,35 +153,6 @@
 
     .cal-day.empty {
       visibility: hidden;
-    }
-
-    /* Mood Meter */
-    .mood-options {
-      display: flex;
-      justify-content: space-between;
-      gap: 6px;
-    }
-
-    .mood-btn {
-      flex: 1;
-      background: #f4f4f4;
-      border: 1px solid transparent;
-      border-radius: 12px;
-      padding: 8px 0;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .mood-btn:hover {
-      background: #eef2ff;
-      transform: scale(1.08);
-    }
-
-    .mood-btn.active {
-      background: #ffffff;
-      border-color: #111111;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     /* Pinterest Grid Below */
@@ -182,17 +176,7 @@
     .card {
       break-inside: avoid;
       margin-bottom: 20px;
-      background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-      border: 1px solid rgba(0, 0, 0, 0.05);
       overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     }
 
     .card-content {
@@ -204,6 +188,7 @@
       height: auto;
       display: block;
       object-fit: cover;
+      border-bottom: 1px dashed #cccccc;
     }
 
     h2 {
@@ -224,6 +209,8 @@
       text-decoration: underline;
       text-underline-offset: 3px;
       font-weight: 500;
+      position: relative;
+      z-index: 1;
     }
 
     a:hover {
@@ -247,11 +234,11 @@
 
   <div class="container">
 
-    <!-- Top Section with Main Info Box & Side Widgets -->
+    <!-- Top Section with Main Info Box & Calendar -->
     <div class="top-section">
       
       <!-- Main Info Header Box -->
-      <header class="hero-card">
+      <header class="hero-card stitched-card">
         <h1>Jane Doe</h1>
         <p class="tagline">Designer & Developer</p>
         <p class="bio">Building clean, minimal digital spaces and thoughtful web applications. Welcome to my personal site!</p>
@@ -261,7 +248,7 @@
       <aside class="side-widgets">
         
         <!-- Calendar Widget -->
-        <div class="widget-card">
+        <div class="widget-card stitched-card">
           <div class="widget-title">
             <span id="month-year-label">Calendar</span>
             <span>•••</span>
@@ -274,21 +261,6 @@
             <div class="cal-day-head">T</div>
             <div class="cal-day-head">F</div>
             <div class="cal-day-head">S</div>
-            <!-- Dynamic days injected by JS -->
-          </div>
-        </div>
-
-        <!-- Mood Meter Widget (under calendar) -->
-        <div class="widget-card">
-          <div class="widget-title">
-            <span>Today's Mood</span>
-            <span id="selected-mood-label" style="font-weight: normal; color: #555;">Focused</span>
-          </div>
-          <div class="mood-options">
-            <button class="mood-btn active" onclick="setMood(this, 'Focused')">⚡</button>
-            <button class="mood-btn" onclick="setMood(this, 'Cozy')">☕</button>
-            <button class="mood-btn" onclick="setMood(this, 'Creative')">🎨</button>
-            <button class="mood-btn" onclick="setMood(this, 'Resting')">🌙</button>
           </div>
         </div>
 
@@ -296,19 +268,17 @@
 
     </div>
 
-    <!-- Pinterest Grid Below with Text & Image Support -->
+    <!-- Pinterest Grid Below -->
     <div class="masonry-grid">
 
-      <!-- Text Card -->
-      <section class="card">
+      <section class="card stitched-card">
         <div class="card-content">
           <h2>About</h2>
           <p>Focused on frontend performance, minimal UI design, and simple layout architecture.</p>
         </div>
       </section>
 
-      <!-- Image Card -->
-      <section class="card">
+      <section class="card stitched-card">
         <img class="card-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Minimalist Workspace">
         <div class="card-content">
           <h2>Workspace Mood</h2>
@@ -316,8 +286,7 @@
         </div>
       </section>
 
-      <!-- Text Card -->
-      <section class="card">
+      <section class="card stitched-card">
         <div class="card-content">
           <h2>Projects</h2>
           <ul>
@@ -328,8 +297,7 @@
         </div>
       </section>
 
-      <!-- Image Card -->
-      <section class="card">
+      <section class="card stitched-card">
         <img class="card-img" src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80" alt="Cozy notebook">
         <div class="card-content">
           <h2>Notes & Ideas</h2>
@@ -337,16 +305,14 @@
         </div>
       </section>
 
-      <!-- Text Card -->
-      <section class="card">
+      <section class="card stitched-card">
         <div class="card-content">
           <h2>Currently</h2>
           <p>Reading, experimenting with grid systems, and building side projects.</p>
         </div>
       </section>
 
-      <!-- Text Card -->
-      <section class="card">
+      <section class="card stitched-card">
         <div class="card-content">
           <h2>Contact</h2>
           <p><a href="mailto:hello@example.com">hello@example.com</a></p>
@@ -358,7 +324,6 @@
   </div>
 
   <script>
-    // Automatically generate calendar & highlight today's date
     function renderCalendar() {
       const calendarGrid = document.getElementById('calendar-grid');
       const label = document.getElementById('month-year-label');
@@ -371,18 +336,15 @@
       const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       label.textContent = `${monthNames[month]} ${year}`;
 
-      // First day of month & total days
       const firstDayIndex = new Date(year, month, 1).getDay();
       const totalDays = new Date(year, month + 1, 0).getDate();
 
-      // Empty slots before day 1
       for (let i = 0; i < firstDayIndex; i++) {
         const emptyCell = document.createElement('div');
         emptyCell.className = 'cal-day empty';
         calendarGrid.appendChild(emptyCell);
       }
 
-      // Render days
       for (let day = 1; day <= totalDays; day++) {
         const dayCell = document.createElement('div');
         dayCell.className = 'cal-day';
@@ -394,13 +356,6 @@
 
         calendarGrid.appendChild(dayCell);
       }
-    }
-
-    // Interactive Mood Meter Handler
-    function setMood(button, moodText) {
-      document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
-      document.getElementById('selected-mood-label').textContent = moodText;
     }
 
     document.addEventListener('DOMContentLoaded', renderCalendar);
