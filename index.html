@@ -1,119 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draggable Cards</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #f4f4f5;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Card Styling */
+    .card {
+      position: absolute;
+      width: 280px;
+      background: #ffffff;
+      border: 2px solid #111111;
+      border-radius: 8px;
+      box-shadow: 4px 4px 0px #111111;
+      user-select: none;
+    }
+
+    /* Drag Handle Header */
+    .card-header {
+      padding: 8px 12px;
+      background: #111111;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 0.85rem;
+      cursor: grab;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    .card-header:active {
+      cursor: grabbing;
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    a {
+      color: #111111;
+    }
+  </style>
+</head>
 <body>
-<script> let highestZIndex = 10;
 
-document.querySelectorAll('.draggable').forEach(card => {
-  const header = card.querySelector('.card-header') || card;
-  let isDragging = false;
-  let offsetX = 0;
-  let offsetY = 0;
-
-  header.addEventListener('mousedown', (e) => {
-    isDragging = true;
+  <div class="site-container">
+    <header class="card draggable" style="top: 50px; left: 50px;">
+      <div class="card-header">★ Profile ★</div>
+      <div class="card-body">
+        <h1>Jane Doe</h1>
+        <p>Designer & Developer</p>
+      </div>
+    </header>
     
-    // Bring clicked card to top
-    highestZIndex++;
-    card.style.zIndex = highestZIndex;
+    <section class="card draggable" style="top: 50px; left: 360px;">
+      <div class="card-header">★ About ★</div>
+      <div class="card-body">
+        <p>Building cool digital spaces. Drag these cards around!</p>
+      </div>
+    </section>
 
-    // Calculate mouse offset inside the card
-    offsetX = e.clientX - card.getBoundingClientRect().left;
-    offsetY = e.clientY - card.getBoundingClientRect().top;
-  });
+    <section class="card draggable" style="top: 220px; left: 360px;">
+      <div class="card-header">★ Projects ★</div>
+      <div class="card-body">
+        <ul>
+          <li><a href="#">Project Alpha</a></li>
+          <li><a href="#">Project Beta</a></li>
+        </ul>
+      </div>
+    </section>
 
-  document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
+    <section class="card draggable" style="top: 240px; left: 50px;">
+      <div class="card-header">★ Contact ★</div>
+      <div class="card-body">
+        <p><a href="mailto:hello@example.com">hello@example.com</a></p>
+      </div>
+    </section>
+  </div>
 
-    // Move card position relative to viewport
-    card.style.left = `${e.clientX - offsetX}px`;
-    card.style.top = `${e.clientY - offsetY}px`;
-  });
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let highestZIndex = 10;
 
-  document.addEventListener('mouseup', () => {
-    isDragging = false;
-  });
-});
-</script>
+      document.querySelectorAll('.draggable').forEach(card => {
+        const header = card.querySelector('.card-header') || card;
+        let isDragging = false;
+        let offsetX = 0;
+        let offsetY = 0;
+
+        header.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          highestZIndex++;
+          card.style.zIndex = highestZIndex;
+
+          offsetX = e.clientX - card.getBoundingClientRect().left;
+          offsetY = e.clientY - card.getBoundingClientRect().top;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          card.style.left = `${e.clientX - offsetX}px`;
+          card.style.top = `${e.clientY - offsetY}px`;
+        });
+
+        document.addEventListener('mouseup', () => {
+          isDragging = false;
+        });
+      });
+    });
+  </script>
 </body>
-<style>
-  * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: system-ui, -apple-system, sans-serif;
-  background-color: #f4f4f5;
-  min-height: 100vh;
-  overflow: hidden; /* Prevents scrollbars when dragging near edges */
-}
-
-/* Card Styling */
-.card {
-  position: absolute; /* Required for dragging */
-  width: 280px;
-  background: #ffffff;
-  border: 2px solid #111111;
-  border-radius: 8px;
-  box-shadow: 4px 4px 0px #111111;
-  user-select: none;
-}
-
-/* Drag Handle Header */
-.card-header {
-  padding: 8px 12px;
-  background: #111111;
-  color: #ffffff;
-  font-weight: bold;
-  font-size: 0.85rem;
-  cursor: grab;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.card-header:active {
-  cursor: grabbing;
-}
-
-.card-body {
-  padding: 16px;
-}
-
-a {
-  color: #111111;
-}
-</style>
-<div class="site-container">
-  
-  <header class="card draggable" style="top: 50px; left: 50px;">
-    <div class="card-header">★ Profile ★</div>
-    <div class="card-body">
-      <h1>Jane Doe</h1>
-      <p>Designer & Developer</p>
-    </div>
-  </header>
-  
-  <section class="card draggable" style="top: 50px; left: 360px;">
-    <div class="card-header">★ About ★</div>
-    <div class="card-body">
-      <p>Building cool digital spaces. Drag these cards around!</p>
-    </div>
-  </section>
-
-  <section class="card draggable" style="top: 220px; left: 360px;">
-    <div class="card-header">★ Projects ★</div>
-    <div class="card-body">
-      <ul>
-        <li><a href="#">Project Alpha</a></li>
-        <li><a href="#">Project Beta</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="card draggable" style="top: 240px; left: 50px;">
-    <div class="card-header">★ Contact ★</div>
-    <div class="card-body">
-      <p><a href="mailto:hello@example.com">hello@example.com</a></p>
-    </div>
-  </section>
-
-</div>
+</html>
