@@ -63,7 +63,7 @@
       display: flex;
       gap: 20px;
       margin-bottom: 24px;
-      align-items: stretch;
+      align-items: flex-start;
     }
 
     @media (max-width: 768px) {
@@ -72,34 +72,34 @@
       }
     }
 
-    /* Compact Header Card Styling */
+    /* Compact Fixed-Height Hero Header */
     .hero-card {
       flex: 1;
-      padding: 18px 22px;
+      padding: 12px 20px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 4px;
+      gap: 2px;
+      align-self: flex-start; /* Stops card from stretching to match side column height */
     }
 
     .hero-card h1 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 400;
       color: #2b1d14;
       line-height: 1;
     }
 
     .hero-card .tagline {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: #7a604c;
-      line-height: 1;
+      line-height: 1.1;
     }
 
     .hero-card .bio {
-      font-size: 1.1rem;
-      line-height: 1.2;
+      font-size: 1.05rem;
+      line-height: 1.15;
       color: #4a382a;
-      margin-top: 4px;
     }
 
     /* Side Column Widgets */
@@ -341,11 +341,11 @@
     <!-- Top Section with Main Info Box & Side Column -->
     <div class="top-section">
       
-      <!-- Compact Main Info Header Box -->
+      <!-- Main Info Header Box -->
       <header class="hero-card stitched-card">
         <h1>Jane Doe</h1>
         <p class="tagline">Designer & Developer</p>
-        <p class="bio">Building clean, minimal digital spaces and thoughtful web applications.</p>
+        <p class="bio">Building clean, minimal digital spaces and thoughtful web applications. Welcome to my cozy corner of the web!</p>
       </header>
 
       <!-- Side Widgets Panel -->
