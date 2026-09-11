@@ -31,7 +31,7 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
       position: relative;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      overflow: hidden; /* Ensures contents stay inside */
+      overflow: hidden;
     }
 
     /* Inner Stitched Line Effect */
@@ -44,7 +44,7 @@
       bottom: 5px;
       border: 1.5px dashed #cccccc;
       border-radius: 1px;
-      pointer-events: none; /* Allows clicking links underneath */
+      pointer-events: none;
       z-index: 10;
     }
 
@@ -185,14 +185,6 @@
       position: relative;
     }
 
-    .card-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-      border-bottom: 1px dashed #cccccc;
-    }
-
     h2 {
       font-size: 1.1rem;
       font-weight: 600;
@@ -212,7 +204,7 @@
       text-underline-offset: 3px;
       font-weight: 500;
       position: relative;
-      z-index: 15; /* Ensures links are clickable above the stitch */
+      z-index: 15;
     }
 
     a:hover {
@@ -270,21 +262,13 @@
 
     </div>
 
-    <!-- Pinterest Masonry Grid Below -->
+    <!-- Masonry Grid Below (Text Cards Only) -->
     <div class="masonry-grid">
 
       <section class="card stitched-card">
         <div class="card-content">
           <h2>About</h2>
           <p>Focused on frontend performance, minimal UI design, and simple layout architecture.</p>
-        </div>
-      </section>
-
-      <section class="card stitched-card">
-        <img class="card-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Minimalist Workspace">
-        <div class="card-content">
-          <h2>Workspace Mood</h2>
-          <p>Current setup for late-night coding and deep work sessions.</p>
         </div>
       </section>
 
@@ -300,7 +284,6 @@
       </section>
 
       <section class="card stitched-card">
-        <img class="card-img" src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80" alt="Cozy notebook">
         <div class="card-content">
           <h2>Notes & Ideas</h2>
           <p>Sketching out layout architectures and user flows on paper first.</p>
