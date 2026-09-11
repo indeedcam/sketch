@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minimal Text Blocks</title>
+  <title>Windows 95 Desktop</title>
   <style>
     * {
       box-sizing: border-box;
@@ -12,59 +12,116 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background-color: #fafafa;
+      font-family: "MS Sans Serif", Tahoma, sans-serif;
+      background-color: #008080; /* Classic Win95 Teal */
       min-height: 100vh;
       overflow: hidden;
-      color: #111111;
+      color: #000000;
     }
 
-    /* Simple Flat Text Block */
+    /* Windows 95 Outer Frame (Beveled 3D Border) */
     .card {
       position: absolute;
-      width: 260px;
-      padding: 24px 20px 20px 20px;
-      background: #ffffff;
-      border: 2px solid #111111;
-      box-shadow: 6px 6px 0px #111111;
+      width: 280px;
+      background: #c0c0c0;
+      border-top: 2px solid #ffffff;
+      border-left: 2px solid #ffffff;
+      border-right: 2px solid #000000;
+      border-bottom: 2px solid #000000;
+      box-shadow: inset -1px -1px 0px #808080, inset 1px 1px 0px #dfdfdf;
+      padding: 3px;
       user-select: none;
     }
 
-    /* Drag Area: Top edge of the box */
-    .drag-handle {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 20px;
+    /* Title Bar (Drag Handle) */
+    .window-header {
+      background: linear-gradient(90deg, #000080, #1084d0);
+      color: #ffffff;
+      padding: 3px 4px;
+      font-weight: bold;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       cursor: grab;
     }
 
-    .drag-handle:active {
+    .window-header:active {
       cursor: grabbing;
     }
 
-    /* Content Styling */
+    .title-left {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .window-icon {
+      font-size: 10px;
+    }
+
+    /* Window Controls (Minimize, Maximize, Close) */
+    .window-controls {
+      display: flex;
+      gap: 2px;
+    }
+
+    .win-btn {
+      width: 16px;
+      height: 14px;
+      background: #c0c0c0;
+      border-top: 1px solid #ffffff;
+      border-left: 1px solid #ffffff;
+      border-right: 1px solid #000000;
+      border-bottom: 1px solid #000000;
+      font-size: 9px;
+      font-weight: bold;
+      line-height: 12px;
+      text-align: center;
+      color: #000000;
+      cursor: pointer;
+    }
+
+    .win-btn:active {
+      border-top: 1px solid #000000;
+      border-left: 1px solid #000000;
+      border-right: 1px solid #ffffff;
+      border-bottom: 1px solid #ffffff;
+      padding: 1px 0 0 1px;
+    }
+
+    /* Window Body Container */
+    .card-body {
+      padding: 12px;
+      background: #c0c0c0;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    /* Recessed Inset Area for Content */
+    .inset-box {
+      background: #ffffff;
+      border-top: 2px solid #808080;
+      border-left: 2px solid #808080;
+      border-right: 2px solid #ffffff;
+      border-bottom: 2px solid #ffffff;
+      padding: 8px;
+      margin-top: 4px;
+    }
+
     h1 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
+      font-size: 14px;
+      margin-bottom: 4px;
     }
 
     h2 {
-      font-size: 0.9rem;
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-
-    p, li {
-      font-size: 0.9rem;
-      line-height: 1.5;
+      margin-bottom: 4px;
     }
 
     a {
-      color: #111111;
+      color: #000080;
     }
 
     ul {
@@ -76,31 +133,82 @@
 
   <div class="site-container">
 
-    <header class="card draggable" style="top: 60px; left: 60px;">
-      <div class="drag-handle"></div>
-      <h1>Jane Doe</h1>
-      <p>Designer & Developer</p>
+    <!-- Profile Window -->
+    <header class="card draggable" style="top: 40px; left: 40px;">
+      <div class="window-header">
+        <div class="title-left">
+          <span class="window-icon">👤</span>
+          <span>Profile.exe</span>
+        </div>
+        <div class="window-controls">
+          <button class="win-btn">_</button>
+          <button class="win-btn">□</button>
+          <button class="win-btn close-btn">✕</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <h1>Jane Doe</h1>
+        <p>Designer & Developer</p>
+      </div>
     </header>
     
-    <section class="card draggable" style="top: 60px; left: 360px;">
-      <div class="drag-handle"></div>
-      <h2>About</h2>
-      <p>Building minimal web spaces and simple layouts.</p>
+    <!-- About Window -->
+    <section class="card draggable" style="top: 40px; left: 340px;">
+      <div class="window-header">
+        <div class="title-left">
+          <span class="window-icon">📝</span>
+          <span>About.txt</span>
+        </div>
+        <div class="window-controls">
+          <button class="win-btn">_</button>
+          <button class="win-btn">□</button>
+          <button class="win-btn close-btn">✕</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="inset-box">
+          <p>Building nostalgic digital spaces and fun web components.</p>
+        </div>
+      </div>
     </section>
 
-    <section class="card draggable" style="top: 220px; left: 360px;">
-      <div class="drag-handle"></div>
-      <h2>Projects</h2>
-      <ul>
-        <li><a href="#">Project Alpha</a></li>
-        <li><a href="#">Project Beta</a></li>
-      </ul>
+    <!-- Projects Window -->
+    <section class="card draggable" style="top: 210px; left: 340px;">
+      <div class="window-header">
+        <div class="title-left">
+          <span class="window-icon">📁</span>
+          <span>Projects</span>
+        </div>
+        <div class="window-controls">
+          <button class="win-btn">_</button>
+          <button class="win-btn">□</button>
+          <button class="win-btn close-btn">✕</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul>
+          <li><a href="#">Project_Alpha.lnk</a></li>
+          <li><a href="#">Project_Beta.lnk</a></li>
+        </ul>
+      </div>
     </section>
 
-    <section class="card draggable" style="top: 200px; left: 60px;">
-      <div class="drag-handle"></div>
-      <h2>Contact</h2>
-      <p><a href="mailto:hello@example.com">hello@example.com</a></p>
+    <!-- Contact Window -->
+    <section class="card draggable" style="top: 200px; left: 40px;">
+      <div class="window-header">
+        <div class="title-left">
+          <span class="window-icon">🌐</span>
+          <span>Contact.html</span>
+        </div>
+        <div class="window-controls">
+          <button class="win-btn">_</button>
+          <button class="win-btn">□</button>
+          <button class="win-btn close-btn">✕</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <p><a href="mailto:hello@example.com">hello@example.com</a></p>
+      </div>
     </section>
 
   </div>
@@ -110,20 +218,23 @@
       let highestZIndex = 10;
 
       document.querySelectorAll('.draggable').forEach(card => {
-        // Only target the top drag-handle area
-        const handle = card.querySelector('.drag-handle');
+        const header = card.querySelector('.window-header');
+        const closeBtn = card.querySelector('.close-btn');
         let isDragging = false;
         let offsetX = 0;
         let offsetY = 0;
 
-        // Bring to front on any click inside the box
+        // Bring window to top when clicked anywhere inside
         card.addEventListener('mousedown', () => {
           highestZIndex++;
           card.style.zIndex = highestZIndex;
         });
 
-        // Drag action triggers ONLY from the top handle
-        handle.addEventListener('mousedown', (e) => {
+        // Dragging ONLY happens when grabbing the blue header bar
+        header.addEventListener('mousedown', (e) => {
+          // Ignore if clicking control buttons
+          if (e.target.classList.contains('win-btn')) return;
+
           isDragging = true;
           offsetX = e.clientX - card.getBoundingClientRect().left;
           offsetY = e.clientY - card.getBoundingClientRect().top;
@@ -138,6 +249,13 @@
         document.addEventListener('mouseup', () => {
           isDragging = false;
         });
+
+        // Close window functionality
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => {
+            card.style.display = 'none';
+          });
+        }
       });
     });
   </script>
