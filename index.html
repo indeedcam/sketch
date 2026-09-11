@@ -6,7 +6,7 @@
   <title>Personal Corkboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Permanent+Marker&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -24,7 +24,7 @@
       background-size: 30px 30px;
       background-position: 0 0, 15px 15px;
       padding: 40px 20px;
-      color: #111111;
+      color: #222222;
       min-height: 100vh;
     }
 
@@ -33,44 +33,88 @@
       margin: 0 auto;
     }
 
-    /* Base Card Styling (Messy Corkboard Note) */
+    /* Base Card Styling (Real Paper Effect) */
     .card {
-      background: #fcfbf7;
-      border-radius: 2px;
-      box-shadow: 2px 8px 20px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0,0,0,0.1);
       position: relative;
+      border-radius: 1px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18), 0 2px 5px rgba(0,0,0,0.12);
       transition: transform 0.2s ease, box-shadow 0.2s ease, z-index 0.2s;
     }
 
     .card:hover {
       transform: scale(1.02) rotate(0deg) !important;
-      box-shadow: 4px 12px 28px rgba(0, 0, 0, 0.25);
-      z-index: 10;
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.28);
+      z-index: 20;
     }
 
-    /* Pushpin Decorator */
+    /* Realistic 3D Pushpin Decorator */
     .pin {
       position: absolute;
-      top: -10px;
+      top: -14px;
       left: 50%;
       transform: translateX(-50%);
-      width: 14px;
-      height: 14px;
-      background-color: #d93838;
-      border-radius: 50%;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.3), inset -2px -2px 4px rgba(0,0,0,0.3);
-      z-index: 5;
+      width: 18px;
+      height: 18px;
+      z-index: 30;
+      pointer-events: none;
     }
-    
+
+    /* Pin Head (3D Sphere with Gloss) */
+    .pin::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle at 35% 35%, #ff7676, #d93838 50%, #7d1212 90%);
+      border-radius: 50%;
+      box-shadow: 
+        inset -2px -2px 4px rgba(0, 0, 0, 0.4),
+        0 4px 8px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Metallic Pin Shaft Highlight */
     .pin::after {
       content: "";
       position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 4px;
-      height: 4px;
-      background: rgba(255,255,255,0.6);
-      border-radius: 50%;
+      top: 14px;
+      left: 8px;
+      width: 2px;
+      height: 6px;
+      background: linear-gradient(to bottom, #cccccc, #777777);
+      box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+      z-index: -1;
+    }
+
+    /* Blue Pushpin Variant */
+    .pin-blue::before {
+      background: radial-gradient(circle at 35% 35%, #56a0ee, #2b6cb0 50%, #103057 90%);
+    }
+
+    /* Paper Textures & Variants */
+    
+    /* Lined Notebook Paper */
+    .paper-lined {
+      background: #fdfbf7;
+      background-image: repeating-linear-gradient(transparent, transparent 27px, #e1dcd0 28px);
+      line-height: 28px;
+      border-left: 2px solid #f2a4a4;
+      padding-left: 12px;
+    }
+
+    /* Yellow Sticky Post-It Note */
+    .paper-sticky {
+      background: #fff8a6;
+      background-image: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.02) 100%);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Kraft Paper Card */
+    .paper-kraft {
+      background: #e8d7be;
+      background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 0);
+      background-size: 8px 8px;
     }
 
     /* Top Section Layout */
@@ -159,7 +203,7 @@
 
     .cal-day-head {
       font-weight: 600;
-      color: #999;
+      color: #888;
       padding-bottom: 4px;
     }
 
@@ -203,7 +247,7 @@
       margin-bottom: 24px;
     }
 
-    /* Messy Rotation Classes */
+    /* Rotations */
     .rot-1 { transform: rotate(-2.5deg); }
     .rot-2 { transform: rotate(1.8deg); }
     .rot-3 { transform: rotate(-1.2deg); }
@@ -214,25 +258,25 @@
       padding: 24px;
     }
 
-    /* Polaroid Specific Card Class */
+    /* Polaroid Specific Paper Card Class */
     .card-polaroid {
       background: #ffffff;
       padding: 14px 14px 20px 14px;
       border-radius: 0px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.22);
     }
 
-    /* Tape decorator for polaroid */
+    /* Washi Tape Decorator */
     .tape {
       position: absolute;
       top: -12px;
       left: 50%;
       transform: translateX(-50%) rotate(-1deg);
-      width: 70px;
-      height: 22px;
-      background: rgba(240, 230, 200, 0.65);
-      border: 1px solid rgba(200, 190, 160, 0.3);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      width: 75px;
+      height: 24px;
+      background: rgba(245, 235, 205, 0.7);
+      border: 1px solid rgba(210, 195, 160, 0.4);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
       z-index: 5;
     }
 
@@ -263,7 +307,7 @@
     p, li {
       font-size: 0.95rem;
       line-height: 1.6;
-      color: #444444;
+      color: #333333;
     }
 
     a {
@@ -298,7 +342,7 @@
     <div class="top-section">
       
       <!-- Main Info Header Box -->
-      <header class="card hero-card">
+      <header class="card hero-card paper-lined">
         <div class="pin"></div>
         <h1>Jane Doe</h1>
         <p class="tagline">Designer & Developer</p>
@@ -309,8 +353,8 @@
       <aside class="side-widgets">
         
         <!-- Calendar Widget -->
-        <div class="card calendar-card">
-          <div class="pin"></div>
+        <div class="card calendar-card paper-kraft">
+          <div class="pin pin-blue"></div>
           <div class="widget-title">
             <span id="month-year-label">Calendar</span>
             <span>•••</span>
@@ -333,9 +377,9 @@
     <!-- Pinterest Grid Below -->
     <div class="masonry-grid">
 
-      <!-- Text Note -->
+      <!-- Lined Note -->
       <div class="grid-item">
-        <section class="card rot-1">
+        <section class="card rot-1 paper-lined">
           <div class="pin"></div>
           <div class="card-content">
             <h2>About</h2>
@@ -353,10 +397,10 @@
         </section>
       </div>
 
-      <!-- Text Note -->
+      <!-- Yellow Sticky Note -->
       <div class="grid-item">
-        <section class="card rot-4">
-          <div class="pin"></div>
+        <section class="card rot-4 paper-sticky">
+          <div class="pin pin-blue"></div>
           <div class="card-content">
             <h2>Projects</h2>
             <ul>
@@ -377,9 +421,9 @@
         </section>
       </div>
 
-      <!-- Text Note -->
+      <!-- Kraft Paper Note -->
       <div class="grid-item">
-        <section class="card rot-3">
+        <section class="card rot-3 paper-kraft">
           <div class="pin"></div>
           <div class="card-content">
             <h2>Currently</h2>
@@ -388,9 +432,9 @@
         </section>
       </div>
 
-      <!-- Text Note -->
+      <!-- Sticky Note -->
       <div class="grid-item">
-        <section class="card rot-2">
+        <section class="card rot-2 paper-sticky">
           <div class="pin"></div>
           <div class="card-content">
             <h2>Contact</h2>
