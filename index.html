@@ -3,11 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Corkboard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <title>Jane Doe — Personal Site</title>
   <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -15,322 +24,218 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      /* Corkboard Texture Pattern */
-      background-color: #cbb291;
-      background-image: 
-        radial-gradient(#b89d79 15%, transparent 16%),
-        radial-gradient(#ab8f6a 15%, transparent 16%);
-      background-size: 30px 30px;
-      background-position: 0 0, 15px 15px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
       padding: 40px 20px;
-      color: #222222;
-      min-height: 100vh;
     }
 
     .container {
-      max-width: 960px;
+      max-width: 1024px;
       margin: 0 auto;
     }
 
-    /* Base Card Styling (Real Paper Effect) */
+    /* Top Hero Header */
+    .hero {
+      background: var(--card-bg);
+      padding: 32px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    .hero h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
+    }
+
+    .hero .tagline {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-top: 4px;
+      margin-bottom: 12px;
+    }
+
+    .hero .bio {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 640px;
+    }
+
+    /* Main Grid Layout (2 Columns) */
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (max-width: 850px) {
+      .layout-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Content Cards */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
     .card {
-      position: relative;
-      border-radius: 1px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18), 0 2px 5px rgba(0,0,0,0.12);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, z-index 0.2s;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .card:hover {
-      transform: scale(1.02) rotate(0deg) !important;
-      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.28);
-      z-index: 20;
+      border-color: #cbd5e1;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -4px rgba(0,0,0,0.05);
     }
 
-    /* Realistic 3D Pushpin Decorator */
-    .pin {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 18px;
-      height: 18px;
-      z-index: 30;
-      pointer-events: none;
-    }
-
-    /* Pin Head (3D Sphere with Gloss) */
-    .pin::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 18px;
-      height: 18px;
-      background: radial-gradient(circle at 35% 35%, #ff7676, #d93838 50%, #7d1212 90%);
-      border-radius: 50%;
-      box-shadow: 
-        inset -2px -2px 4px rgba(0, 0, 0, 0.4),
-        0 4px 8px rgba(0, 0, 0, 0.35);
-    }
-
-    /* Metallic Pin Shaft Highlight */
-    .pin::after {
-      content: "";
-      position: absolute;
-      top: 14px;
-      left: 8px;
-      width: 2px;
-      height: 6px;
-      background: linear-gradient(to bottom, #cccccc, #777777);
-      box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
-      z-index: -1;
-    }
-
-    /* Blue Pushpin Variant */
-    .pin-blue::before {
-      background: radial-gradient(circle at 35% 35%, #56a0ee, #2b6cb0 50%, #103057 90%);
-    }
-
-    /* Paper Textures & Variants */
-    
-    /* Lined Notebook Paper */
-    .paper-lined {
-      background: #fdfbf7;
-      background-image: repeating-linear-gradient(transparent, transparent 27px, #e1dcd0 28px);
-      line-height: 28px;
-      border-left: 2px solid #f2a4a4;
-      padding-left: 12px;
-    }
-
-    /* Yellow Sticky Post-It Note */
-    .paper-sticky {
-      background: #fff8a6;
-      background-image: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.02) 100%);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    /* Kraft Paper Card */
-    .paper-kraft {
-      background: #e8d7be;
-      background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 0);
-      background-size: 8px 8px;
-    }
-
-    /* Top Section Layout */
-    .top-section {
-      display: flex;
-      gap: 24px;
-      margin-bottom: 32px;
-      align-items: stretch;
-    }
-
-    @media (max-width: 768px) {
-      .top-section {
-        flex-direction: column;
-      }
-    }
-
-    .hero-card {
-      flex: 1;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 12px;
-      transform: rotate(-1.5deg);
-    }
-
-    .hero-card h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-
-    .hero-card .tagline {
-      font-size: 1.05rem;
-      color: #666666;
-    }
-
-    .hero-card .bio {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #444444;
-    }
-
-    /* Side Column Calendar */
-    .side-widgets {
-      width: 280px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    @media (max-width: 768px) {
-      .side-widgets {
-        width: 100%;
-      }
-    }
-
-    .calendar-card {
-      padding: 20px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      transform: rotate(2deg);
-    }
-
-    .widget-title {
-      font-size: 0.85rem;
+    h2 {
+      font-size: 1.25rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #777777;
+      letter-spacing: -0.015em;
       margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 0.975rem;
+    }
+
+    /* Links & Lists */
+    ul {
+      list-style-type: none;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    li:last-child {
+      margin-bottom: 0;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
+
+    .project-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f5f9;
     }
 
-    /* Mini Calendar */
+    .project-item:last-child {
+      border-bottom: none;
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* Sidebar Layout */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Calendar Widget */
+    .calendar-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .calendar-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 4px;
       text-align: center;
-      font-size: 0.8rem;
+      font-size: 0.825rem;
     }
 
-    .cal-day-head {
+    .cal-head {
       font-weight: 600;
-      color: #888;
-      padding-bottom: 4px;
+      color: var(--text-muted);
+      padding-bottom: 6px;
     }
 
     .cal-day {
-      padding: 6px 0;
-      border-radius: 2px;
-      color: #444;
+      padding: 8px 0;
+      border-radius: 6px;
+      color: var(--text-main);
+      font-weight: 500;
     }
 
     .cal-day.today {
-      background: #d93838;
+      background: var(--accent);
       color: #ffffff;
       font-weight: 700;
-      border-radius: 50%;
     }
 
     .cal-day.empty {
       visibility: hidden;
     }
 
-    /* Pinterest Masonry Grid Below */
-    .masonry-grid {
-      column-count: 3;
-      column-gap: 24px;
+    /* Image Highlight Card */
+    .image-card {
+      padding: 0;
+      overflow: hidden;
     }
 
-    @media (max-width: 768px) {
-      .masonry-grid {
-        column-count: 2;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .masonry-grid {
-        column-count: 1;
-      }
-    }
-
-    .grid-item {
-      break-inside: avoid;
-      margin-bottom: 24px;
-    }
-
-    /* Rotations */
-    .rot-1 { transform: rotate(-2.5deg); }
-    .rot-2 { transform: rotate(1.8deg); }
-    .rot-3 { transform: rotate(-1.2deg); }
-    .rot-4 { transform: rotate(3deg); }
-    .rot-5 { transform: rotate(-2deg); }
-
-    .card-content {
-      padding: 24px;
-    }
-
-    /* Polaroid Specific Paper Card Class */
-    .card-polaroid {
-      background: #ffffff;
-      padding: 14px 14px 20px 14px;
-      border-radius: 0px;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.22);
-    }
-
-    /* Washi Tape Decorator */
-    .tape {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%) rotate(-1deg);
-      width: 75px;
-      height: 24px;
-      background: rgba(245, 235, 205, 0.7);
-      border: 1px solid rgba(210, 195, 160, 0.4);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-      z-index: 5;
-    }
-
-    .polaroid-img {
+    .image-card img {
       width: 100%;
-      height: 200px;
+      height: 180px;
       object-fit: cover;
       display: block;
-      border: 1px solid #eee;
     }
 
-    .polaroid-caption {
-      font-family: 'Caveat', cursive;
-      font-size: 1.35rem;
-      color: #333333;
-      text-align: center;
-      margin-top: 12px;
-      line-height: 1.2;
-    }
-
-    h2 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.01em;
-    }
-
-    p, li {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #333333;
-    }
-
-    a {
-      color: #111111;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      font-weight: 600;
-    }
-
-    a:hover {
-      color: #d93838;
-    }
-
-    ul {
-      list-style-type: none;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-    }
-
-    li:last-child {
-      margin-bottom: 0;
+    .image-card .caption {
+      padding: 12px 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
     }
   </style>
 </head>
@@ -338,110 +243,79 @@
 
   <div class="container">
 
-    <!-- Top Section with Main Info Box & Calendar -->
-    <div class="top-section">
-      
-      <!-- Main Info Header Box -->
-      <header class="card hero-card paper-lined">
-        <div class="pin"></div>
-        <h1>Jane Doe</h1>
-        <p class="tagline">Designer & Developer</p>
-        <p class="bio">Building clean, minimal digital spaces and thoughtful web applications. Welcome to my personal corkboard!</p>
-      </header>
+    <!-- Top Hero Section -->
+    <header class="hero">
+      <h1>Jane Doe</h1>
+      <p class="tagline">Designer & Developer</p>
+      <p class="bio">Building clean, modern digital spaces and thoughtful web applications with a focus on usability and simplicity.</p>
+    </header>
 
-      <!-- Side Widgets Panel -->
-      <aside class="side-widgets">
-        
-        <!-- Calendar Widget -->
-        <div class="card calendar-card paper-kraft">
-          <div class="pin pin-blue"></div>
-          <div class="widget-title">
-            <span id="month-year-label">Calendar</span>
-            <span>•••</span>
+    <!-- Main Layout Grid -->
+    <div class="layout-grid">
+
+      <!-- Main Column -->
+      <main class="main-content">
+
+        <section class="card">
+          <h2>About</h2>
+          <p>Focused on frontend performance, modern CSS layout architectures, and clean interface design. I enjoy turning complex technical problems into intuitive user experiences.</p>
+        </section>
+
+        <section class="card">
+          <h2>Projects</h2>
+          <div class="project-item">
+            <a href="#">Project Alpha</a>
+            <span class="project-desc">Minimal Web App</span>
+          </div>
+          <div class="project-item">
+            <a href="#">Project Beta</a>
+            <span class="project-desc">Design System</span>
+          </div>
+          <div class="project-item">
+            <a href="#">Project Gamma</a>
+            <span class="project-desc">Open Source Tools</span>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Currently</h2>
+          <p>Reading about modern web APIs, refining grid systems, and building open-source developer tools.</p>
+        </section>
+
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+
+        <!-- Sidebar Calendar Widget -->
+        <div class="calendar-card">
+          <div class="calendar-header">
+            <span class="calendar-title" id="month-year-label">Calendar</span>
           </div>
           <div class="calendar-grid" id="calendar-grid">
-            <div class="cal-day-head">S</div>
-            <div class="cal-day-head">M</div>
-            <div class="cal-day-head">T</div>
-            <div class="cal-day-head">W</div>
-            <div class="cal-day-head">T</div>
-            <div class="cal-day-head">F</div>
-            <div class="cal-day-head">S</div>
+            <div class="cal-head">S</div>
+            <div class="cal-head">M</div>
+            <div class="cal-head">T</div>
+            <div class="cal-head">W</div>
+            <div class="cal-head">T</div>
+            <div class="cal-head">F</div>
+            <div class="cal-head">S</div>
           </div>
         </div>
 
+        <!-- Contact Box -->
+        <div class="card">
+          <h2>Contact</h2>
+          <p><a href="mailto:hello@example.com">hello@example.com</a></p>
+        </div>
+
+        <!-- Featured Image Card -->
+        <div class="card image-card">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Workspace">
+          <div class="caption">Workspace setup</div>
+        </div>
+
       </aside>
-
-    </div>
-
-    <!-- Pinterest Grid Below -->
-    <div class="masonry-grid">
-
-      <!-- Lined Note -->
-      <div class="grid-item">
-        <section class="card rot-1 paper-lined">
-          <div class="pin"></div>
-          <div class="card-content">
-            <h2>About</h2>
-            <p>Focused on frontend performance, minimal UI design, and simple layout architecture.</p>
-          </div>
-        </section>
-      </div>
-
-      <!-- Polaroid Photo Card -->
-      <div class="grid-item">
-        <section class="card card-polaroid rot-2">
-          <div class="tape"></div>
-          <img class="polaroid-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Workspace">
-          <p class="polaroid-caption">workspace setup ☕</p>
-        </section>
-      </div>
-
-      <!-- Yellow Sticky Note -->
-      <div class="grid-item">
-        <section class="card rot-4 paper-sticky">
-          <div class="pin pin-blue"></div>
-          <div class="card-content">
-            <h2>Projects</h2>
-            <ul>
-              <li><a href="#">Project Alpha</a> — Minimal Web App</li>
-              <li><a href="#">Project Beta</a> — Design System</li>
-              <li><a href="#">Project Gamma</a> — Open Source Tools</li>
-            </ul>
-          </div>
-        </section>
-      </div>
-
-      <!-- Polaroid Photo Card -->
-      <div class="grid-item">
-        <section class="card card-polaroid rot-5">
-          <div class="tape"></div>
-          <img class="polaroid-img" src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80" alt="Notebook">
-          <p class="polaroid-caption">late night sketches ✍️</p>
-        </section>
-      </div>
-
-      <!-- Kraft Paper Note -->
-      <div class="grid-item">
-        <section class="card rot-3 paper-kraft">
-          <div class="pin"></div>
-          <div class="card-content">
-            <h2>Currently</h2>
-            <p>Reading, experimenting with grid systems, and building side projects.</p>
-          </div>
-        </section>
-      </div>
-
-      <!-- Sticky Note -->
-      <div class="grid-item">
-        <section class="card rot-2 paper-sticky">
-          <div class="pin"></div>
-          <div class="card-content">
-            <h2>Contact</h2>
-            <p><a href="mailto:hello@example.com">hello@example.com</a></p>
-          </div>
-        </section>
-      </div>
 
     </div>
 
@@ -457,7 +331,7 @@
       const month = now.getMonth();
       const today = now.getDate();
 
-      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
       label.textContent = `${monthNames[month]} ${year}`;
 
       const firstDayIndex = new Date(year, month, 1).getDay();
