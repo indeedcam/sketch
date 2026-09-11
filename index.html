@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🍰</title>
+  <title>Personal Site</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -23,7 +26,7 @@
       margin: 0 auto;
     }
 
-  
+    /* Stitched Card Base Styling */
     .stitched-card {
       background: #ffffff;
       border-radius: 2px;
@@ -98,6 +101,7 @@
       width: 280px;
       display: flex;
       flex-direction: column;
+      gap: 20px;
     }
 
     @media (max-width: 768px) {
@@ -108,7 +112,6 @@
 
     .widget-card {
       padding: 20px;
-      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -155,6 +158,241 @@
 
     .cal-day.empty {
       visibility: hidden;
+    }
+
+    /* Cute Mini Music Player Widget */
+    .player-widget {
+      position: relative;
+      z-index: 15;
+    }
+
+    .player-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .album-art {
+      width: 44px;
+      height: 44px;
+      background: #f0e6e6;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      border: 1px solid #e0d0d0;
+      flex-shrink: 0;
+    }
+
+    .track-info {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .track-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #222;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .track-artist {
+      font-size: 0.78rem;
+      color: #777;
+      margin-top: 2px;
+    }
+
+    /* Audio Equalizer Visualizer Bars */
+    .equalizer {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 14px;
+    }
+
+    .eq-bar {
+      width: 3px;
+      background: #e60023;
+      height: 4px;
+      border-radius: 1px;
+      transition: height 0.2s ease;
+    }
+
+    .playing .eq-bar:nth-child(1) { animation: bounce 0.8s infinite ease-in-out; }
+    .playing .eq-bar:nth-child(2) { animation: bounce 0.6s infinite ease-in-out 0.2s; }
+    .playing .eq-bar:nth-child(3) { animation: bounce 0.9s infinite ease-in-out 0.4s; }
+
+    @keyframes bounce {
+      0%, 100% { height: 4px; }
+      50% { height: 14px; }
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      width: 100%;
+      height: 4px;
+      background: #eee;
+      border-radius: 2px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 35%;
+      height: 100%;
+      background: #111111;
+      border-radius: 2px;
+      transition: width 0.1s linear;
+    }
+
+    /* Player Controls */
+    .player-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ctrl-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #555;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s ease, transform 0.15s ease;
+    }
+
+    .ctrl-btn:hover {
+      color: #111111;
+      transform: scale(1.1);
+    }
+
+    .play-btn {
+      width: 32px;
+      height: 32px;
+      background: #111111;
+      color: #ffffff;
+      border-radius: 50%;
+      font-size: 0.8rem;
+    }
+
+    .play-btn:hover {
+      background: #e60023;
+      color: #ffffff;
+    }
+
+    /* PictoChat Retro DS Widget */
+    .pictochat-card {
+      background: #e8e8e0;
+      position: relative;
+      z-index: 15;
+      padding: 16px;
+    }
+
+    .picto-title {
+      font-family: 'VT323', monospace;
+      font-size: 1.1rem;
+      color: #222222;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #c8c8c0;
+      padding-bottom: 4px;
+    }
+
+    .picto-room {
+      background: #88c070;
+      color: #0f380f;
+      font-size: 0.85rem;
+      padding: 1px 4px;
+      border-radius: 1px;
+    }
+
+    /* Pixel Grid Background */
+    .picto-chat-window {
+      background-color: #ffffff;
+      background-image: linear-gradient(#e2e8e0 1px, transparent 1px), linear-gradient(90deg, #e2e8e0 1px, transparent 1px);
+      background-size: 8px 8px;
+      border: 2px solid #555555;
+      border-radius: 2px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-family: 'VT323', monospace;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .picto-msg {
+      background: #ffffff;
+      border: 1px solid #333333;
+      border-radius: 2px;
+      padding: 4px 6px;
+      box-shadow: 1px 1px 0px #333333;
+      position: relative;
+    }
+
+    .picto-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #444444;
+      border-bottom: 1px dashed #cccccc;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+    }
+
+    .picto-user {
+      font-weight: bold;
+      color: #2b6cb0;
+    }
+
+    .picto-text {
+      font-size: 0.95rem;
+      color: #111111;
+      line-height: 1.1;
+    }
+
+    /* Hand drawn doodle simulated style */
+    .picto-doodle {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: #222222;
+    }
+
+    .picto-input-bar {
+      display: flex;
+      gap: 4px;
+      margin-top: 8px;
+    }
+
+    .picto-input {
+      flex: 1;
+      border: 1px solid #555;
+      padding: 4px 6px;
+      font-family: 'VT323', monospace;
+      font-size: 0.9rem;
+      background: #fff;
+    }
+
+    .picto-send {
+      background: #555;
+      color: #fff;
+      border: none;
+      font-family: 'VT323', monospace;
+      padding: 0 8px;
+      cursor: pointer;
     }
 
     /* Pinterest Masonry Grid Below */
@@ -228,7 +466,7 @@
 
   <div class="container">
 
-    <!-- Top Section with Main Info Box & Calendar -->
+    <!-- Top Section with Main Info Box & Side Column -->
     <div class="top-section">
       
       <!-- Main Info Header Box -->
@@ -258,11 +496,95 @@
           </div>
         </div>
 
+        <!-- Cute Music Player Widget -->
+        <div class="widget-card stitched-card player-widget">
+          <div class="widget-title">
+            <span>Now Playing</span>
+            <div class="equalizer" id="eq-visualizer">
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+              <div class="eq-bar"></div>
+            </div>
+          </div>
+          
+          <div class="player-header">
+            <div class="album-art" id="album-emoji">☕</div>
+            <div class="track-info">
+              <div class="track-title" id="track-title">Lofi Chill Beats</div>
+              <div class="track-artist" id="track-artist">Coffee Shop Vibes</div>
+            </div>
+          </div>
+
+          <div class="progress-container" onclick="seekProgress(event)">
+            <div class="progress-bar" id="progress-bar"></div>
+          </div>
+
+          <div class="player-controls">
+            <button class="ctrl-btn" onclick="prevTrack()" title="Previous">⏮</button>
+            <button class="ctrl-btn play-btn" id="play-btn" onclick="togglePlay()" title="Play/Pause">▶</button>
+            <button class="ctrl-btn" onclick="nextTrack()" title="Next">⏭</button>
+            <button class="ctrl-btn" onclick="toggleHeart(this)" title="Favorite">♡</button>
+          </div>
+        </div>
+
+        <!-- PictoChat DS Retro Widget -->
+        <div class="widget-card stitched-card pictochat-card">
+          <div class="picto-title">
+            <span>PictoChat</span>
+            <span class="picto-room">Room A [3]</span>
+          </div>
+
+          <div class="picto-chat-window" id="picto-window">
+            
+            <!-- Message 1 -->
+            <div class="picto-msg">
+              <div class="picto-meta">
+                <span class="picto-user">User1</span>
+                <span>12:04</span>
+              </div>
+              <div class="picto-text">anyone here?</div>
+            </div>
+
+            <!-- Message 2 -->
+            <div class="picto-msg">
+              <div class="picto-meta">
+                <span class="picto-user" style="color: #d93838;">Jane</span>
+                <span>12:05</span>
+              </div>
+              <div class="picto-text picto-doodle">heyy! (っ＾◡＾)っ</div>
+            </div>
+
+            <!-- Message 3 -->
+            <div class="picto-msg">
+              <div class="picto-meta">
+                <span class="picto-user" style="color: #2b8a3e;">Anon</span>
+                <span>12:06</span>
+              </div>
+              <div class="picto-text">cool website!</div>
+            </div>
+
+            <!-- Message 4 -->
+            <div class="picto-msg">
+              <div class="picto-meta">
+                <span class="picto-user" style="color: #d93838;">Jane</span>
+                <span>12:07</span>
+              </div>
+              <div class="picto-text">thanks! enjoy your stay ★</div>
+            </div>
+
+          </div>
+
+          <div class="picto-input-bar">
+            <input type="text" class="picto-input" id="picto-input" placeholder="Type a message..." onkeydown="handlePictoKey(event)">
+            <button class="picto-send" onclick="sendPictoMsg()">SEND</button>
+          </div>
+        </div>
+
       </aside>
 
     </div>
 
-    <!-- Masonry Grid Below (Text Cards Only) -->
+    <!-- Masonry Grid Below (Text Cards) -->
     <div class="masonry-grid">
 
       <section class="card stitched-card">
@@ -275,7 +597,11 @@
       <section class="card stitched-card">
         <div class="card-content">
           <h2>Projects</h2>
-        hihihi
+          <ul>
+            <li><a href="#">Project Alpha</a> — Minimal Web App</li>
+            <li><a href="#">Project Beta</a> — Design System</li>
+            <li><a href="#">Project Gamma</a> — Open Source Tools</li>
+          </ul>
         </div>
       </section>
 
@@ -305,6 +631,7 @@
   </div>
 
   <script>
+    // Calendar Generator
     function renderCalendar() {
       const calendarGrid = document.getElementById('calendar-grid');
       const label = document.getElementById('month-year-label');
@@ -339,7 +666,94 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', renderCalendar);
+    // Music Player Scripts
+    const playlist = [
+      { title: "Lofi Chill Beats", artist: "Coffee Shop Vibes", emoji: "☕" },
+      { title: "Midnight Coding", artist: "Syntax & Sound", emoji: "🌙" },
+      { title: "Rainy Afternoon", artist: "Cozy Melodies", emoji: "🌧️" }
+    ];
+
+    let currentTrackIndex = 0;
+    let isPlaying = false;
+
+    function updateTrack() {
+      const track = playlist[currentTrackIndex];
+      document.getElementById('track-title').textContent = track.title;
+      document.getElementById('track-artist').textContent = track.artist;
+      document.getElementById('album-emoji').textContent = track.emoji;
+      document.getElementById('progress-bar').style.width = '15%';
+    }
+
+    function togglePlay() {
+      isPlaying = !isPlaying;
+      const playBtn = document.getElementById('play-btn');
+      const eq = document.getElementById('eq-visualizer');
+
+      if (isPlaying) {
+        playBtn.textContent = '❚❚';
+        eq.classList.add('playing');
+      } else {
+        playBtn.textContent = '▶';
+        eq.classList.remove('playing');
+      }
+    }
+
+    function prevTrack() {
+      currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+      updateTrack();
+    }
+
+    function nextTrack() {
+      currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+      updateTrack();
+    }
+
+    function toggleHeart(btn) {
+      btn.textContent = btn.textContent === '♡' ? '♥' : '♡';
+      btn.style.color = btn.textContent === '♥' ? '#e60023' : '#555';
+    }
+
+    function seekProgress(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const width = rect.width;
+      const percentage = (clickX / width) * 100;
+      document.getElementById('progress-bar').style.width = percentage + '%';
+    }
+
+    // PictoChat Send Script
+    function sendPictoMsg() {
+      const input = document.getElementById('picto-input');
+      const val = input.value.trim();
+      if (!val) return;
+
+      const windowEl = document.getElementById('picto-window');
+      const now = new Date();
+      const timeStr = `${now.getHours()}:${now.getMinutes() < 10 ? '0' : ''}${now.getMinutes()}`;
+
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'picto-msg';
+      msgDiv.innerHTML = `
+        <div class="picto-meta">
+          <span class="picto-user" style="color:#d93838;">You</span>
+          <span>${timeStr}</span>
+        </div>
+        <div class="picto-text">${val}</div>
+      `;
+
+      windowEl.appendChild(msgDiv);
+      input.value = '';
+      windowEl.scrollTop = windowEl.scrollHeight;
+    }
+
+    function handlePictoKey(e) {
+      if (e.key === 'Enter') sendPictoMsg();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCalendar();
+      updateTrack();
+    });
   </script>
 
 </body>
